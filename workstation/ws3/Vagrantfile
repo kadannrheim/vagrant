@@ -7,12 +7,11 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "ansible2_9", "/home/ansible2_9/"
   # absolute path
   config.vm.synced_folder "D:/WORK/Obsidian_Work_VTB/git/ansible/", "/home/ansible2_9/"
-  # присваиваем ip адрес
-  # config.vm.network "public_network", ip: "192.168.0.110"
-  
+  config.vm.network "public_network", ip: "192.168.0.113"
+
   config.vm.provider "virtualbox" do |vb|
     # имя виртуальной машины
-    vb.name = "server2004ansible"
+    vb.name = "ws3"
     # объем оперативной памяти
     vb.memory = 512
     # количество ядер процессора
@@ -20,7 +19,7 @@ Vagrant.configure(2) do |config|
   end
   
   # hostname виртуальной машины
-  config.vm.hostname = "server2004ansible"
+  config.vm.hostname = "ws2"
   # прокидываем порты на машину vagrant
   config.vm.network "forwarded_port", guest: 80, host: 8080, id: "web1"
   config.vm.network "forwarded_port", guest: 443, host: 8443, id: "web2"
