@@ -1,0 +1,25 @@
+Vagrant.configure(2) do |config|
+  # образ системы Ubuntu 20.04.6 LTS (Focal Fossa)
+  config.vm.box = "ubuntu/focal64"
+  # не проверять репозиторий на наличие обновлений
+  config.vm.box_check_update = false
+  # relative path to where Vagrantfile resides
+  config.vm.synced_folder "ansible2_9", "/home/ansible2_9/"
+  # absolute path
+  config.vm.synced_folder "D:/WORK/Obsidian_Work_VTB/git/ansible/", "/home/ansible2_9/"
+  
+  config.vm.provider "virtualbox" do |vb|
+    # имя виртуальной машины
+    vb.name = "server2004ansible"
+    # объем оперативной памяти
+    vb.memory = 512
+    # количество ядер процессора
+    vb.cpus = 1
+  end
+  
+  # hostname виртуальной машины
+  config.vm.hostname = "server2004ansible"
+  # прокидываем порты на машину vagrant
+  config.vm.network "forwarded_port", guest: 80, host: 8080, id: "web1"
+  config.vm.network "forwarded_port", guest: 443, host: 8443, id: "web2"
+end

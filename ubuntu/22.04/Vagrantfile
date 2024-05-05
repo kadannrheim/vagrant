@@ -1,0 +1,23 @@
+Vagrant.configure(2) do |config|
+  # образ системы Ubuntu 22.04.4 LTS (Jammy Jellyfish)
+  config.vm.box = "bento/ubuntu-22.04"
+  # не проверять репозиторий на наличие обновлений
+  config.vm.box_check_update = false
+  # прописываем ключи ssh
+  #config.ssh.private_key_path = "C:/Users/kadannr/.vagrant.d/insecure_private_keys/vagrant.key.rsa"
+  config.ssh.forward_agent = true
+
+  config.vm.provider "virtualbox" do |vb|
+    # имя виртуальной машины
+    vb.name = "server2204ansible"
+    # объем оперативной памяти
+    vb.memory = 512
+    # количество ядер процессора
+    vb.cpus = 1
+  end
+  
+  # hostname виртуальной машины
+ config.vm.hostname = "server2204ansible"
+ config.vm.network "forwarded_port", guest: 80, host: 8080, id: "web1"
+ config.vm.network "forwarded_port", guest: 443, host: 8443, id: "web2"
+end
